@@ -1,0 +1,82 @@
+{
+    "attributes": {
+        "location": "Germany",
+        "type": "Robot",
+        "name": "UR5",
+        "manufacturer": "Universal Robots"
+    },
+    "features": {
+        "shoulder_pan_joint": {
+            "properties": {
+                "pid": {
+                    "p": 500.0,
+                    "i": 0.01,
+                    "d": 50.0,
+                    "i_clamp_min": -100.0,
+                    "i_clamp_max": 100.0
+                },
+                "value": null
+            }
+        },
+        "shoulder_lift_joint": {
+            "properties": {
+                "pid": {
+                    "p": 500.0,
+                    "i": 100.0,
+                    "d": 30.0,
+                    "i_clamp_min": -400.0,
+                    "i_clamp_max": 400.0
+                },
+                "value": null
+            }
+        },
+        "elbow_joint": {
+            "properties": {
+                "pid": {
+                    "p": 10000.0,
+                    "i": 0.01,
+                    "d": 50.0,
+                    "i_clamp_min": -100.0,
+                    "i_clamp_max": 100.0
+                },
+                "value": null
+            }
+        },
+        "wrist_1_joint": {
+            "properties": {
+                "pid": {
+                    "p": 200.0,
+                    "i": 10.0,
+                    "d": 20.0,
+                    "i_clamp_min": -400.0,
+                    "i_clamp_max": 400.0
+                },
+                "value": null
+            }
+        },
+        "wrist_2_joint": {
+            "properties": {
+                "pid": {
+                    "p": 100.0,
+                    "i": 0.1,
+                    "d": 10.0,
+                    "i_clamp_min": -100.0,
+                    "i_clamp_max": 100.0
+                },
+                "value": null
+            }
+        },
+        "wrist_3_joint": {
+            "properties": {
+                "pid": {
+                    "p": 100.0,
+                    "i": 0.1,
+                    "d": 10.0,
+                    "i_clamp_min": -100.0,
+                    "i_clamp_max": 100.0
+                },
+                "value": null
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "targetActorSelection": "/system/sharding/connection",
+    "headers": {
+        "aggregate": false
+    },
+    "piggybackCommand": {
+        "type": "connectivity.commands:createConnection",
+        "connection": {
+            "name": "hono-ditto",
+            "id": "hono-ditto-verbindung-bon",
+            "connectionType": "amqp-10",
+            "connectionStatus": "open",
+            "uri": "amqp://consumer%40HONO:verysecret@100.120.169.61:32510",
+            "failoverEnabled": true,
+            "sources": [{
+                "addresses": [
+                    "telemetry/tchamabe.landry.org",
+                    "event/tchamabe.landry.org"
+                ],
+                "authorizationContext": ["nginx:ditto"]
+            }],
+            "mappingContext": {
+                "mappingEngine": "JavaScript",
+                "options": {
+                    "incomingScript": "function mapToDittoProtocolMsg(\n    headers,\n    textPayload,\n    bytePayload,\n    contentType\n) {\n\n    if (contentType !== \"application/octet-stream\") {\n        return null;\n    }\n\n   const jsonString = String.fromCharCode.apply(null, new Uint8Array(bytePayload))\n    var jsonData = JSON.parse(jsonString);\n    var elbow_joint = jsonData.elbow_joint_position_controller;\n    var shoulder_lift_joint = jsonData.shoulder_lift_joint_position_controller;\n    var shoulder_pan_joint = jsonData.shoulder_pan_joint_position_controller;\n    var wrist_1_joint = jsonData.wrist_1_joint_position_controller;\n    var wrist_2_joint = jsonData.wrist_2_joint_position_controller;\n    var wrist_3_joint = jsonData.wrist_3_joint_position_controller;\n    var path;\n    var value;\n    if (elbow_joint != null && shoulder_lift_joint != null && shoulder_lift_joint != null && wrist_1_joint != null && wrist_2_joint != null && wrist_3_joint != null) {\n        path = \"/features\";\n        value = {\n                shoulder_pan_joint: {\n                    properties: {\n                        value: shoulder_pan_joint\n                    }\n                },\n                shoulder_lift_joint: {\n                    properties: {\n                        value: shoulder_lift_joint\n                    }\n                },\n                elbow_joint: {\n                    properties: {\n                        value: elbow_joint\n                    }\n                },\n                wrist_1_joint: {\n                    properties: {\n                        value: wrist_1_joint\n                    }\n                },\n                wrist_2_joint: {\n                    properties: {\n                        value: wrist_2_joint\n                    }\n                },\n                wrist_3_joint: {\n                    properties: {\n                        value: wrist_3_joint\n                    }\n                }\n            };\n    } else if (shoulder_pan_joint != null) {\n        path = \"/features/shoulder_pan_joint/properties/value\";\n        value = shoulder_pan_joint;\n    } else if (shoulder_lift_joint != null) {\n        path = \"/features/shoulder_lift_joint/properties/value\";\n        value = shoulder_lift_joint;\n    } else if (elbow_joint != null) {\n        path = \"/features/elbow_joint/properties/value\";\n        value = elbow_joint; } else if (wrist_1_joint != null) {\n        path = \"/features/wrist_1_joint/properties/value\";\n        value = wrist_1_joint; } else if (wrist_2_joint != null) {\n        path = \"/features/wrist_2_joint/properties/value\";\n        value = wrist_2_joint; } else if (wrist_3_joint != null) {\n        path = \"/features/wrist_3_joint/properties/value\";\n        value = wrist_3_joint; }\n    \n    if (!path || !value) {\n        return null;\n    }\n\n    return Ditto.buildDittoProtocolMsg( \"tchamabe.landry.org\",\n        headers[\"device_id\"],\n        \"things\",\n        \"twin\",\n        \"commands\",\n        \"modify\",\n        path,\n        headers,\n         value\n    );\n}"
+                }
+            }
+        }
+    }
+}
