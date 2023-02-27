@@ -96,7 +96,7 @@ das Bild zeigt vier Panele:
 
 3. bereiten wir Grafana für die Moniitoring der Daten.
 
-siehe dazu den Verzeichnis [Grafana](Monitoring/Grafana/).
+siehe dazu den Verzeichnis [Grafana](Monitoring/Grafana/README.md).
 
 4. eine Verbindung zwischen Hono und Ditto erstellen.
 

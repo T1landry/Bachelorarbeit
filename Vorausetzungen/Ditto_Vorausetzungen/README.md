@@ -1,4 +1,4 @@
-# Voraustzungen für die Nutzung von Eclipse Hono.
+# Vorausetzungen für die Nutzung von Eclipse Ditto.
 
 1. Docker Instalieren
 
