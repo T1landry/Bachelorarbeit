@@ -270,7 +270,7 @@ siehe dazu den Verzeichnis [Grafana](Monitoring/Grafana/).
      -H 'Content-Type: application/json' -d @robotertwins.json
      ```
 
-    Unsere Thingsinformationen sind auch in die Datei [robotertwins.json](Buffer/ditto_doku/robotertwins.json).
+    Unsere Thingsinformationen sind auch in die Datei [things.json](Buffer/ditto_doku/things.json).
 
     3. eine Mappingsfunktion erstellen:
 
